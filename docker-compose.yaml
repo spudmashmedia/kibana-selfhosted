@@ -1,0 +1,16 @@
+version: '2'
+services:
+  es:
+    image: elasticsearch:latest
+    ports:
+      - 19200:9200
+  ki:
+    image: kibana:latest
+    ports:
+      - 15601:5601
+    links:
+      - "es"
+    restart: always
+    environment:
+      - ELASTICSEARCH_URL=http://es:9200
+      - ELASTICSEARCH_SSL_VERIFY=false
